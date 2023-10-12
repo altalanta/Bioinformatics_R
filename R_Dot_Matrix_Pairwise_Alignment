@@ -1,0 +1,37 @@
+# Define two DNA sequences (replace with your sequences)
+sequence1 <- "ATCGATCGATCG"
+sequence2 <- "ATCGGTCGATCG"
+
+# Initialize a matrix to store the dot matrix
+seq1_length <- nchar(sequence1)
+seq2_length <- nchar(sequence2)
+dot_matrix <- matrix(0, nrow = seq1_length, ncol = seq2_length)
+
+# Fill the dot matrix with 1s where bases match
+for (i in 1:seq1_length) {
+  for (j in 1:seq2_length) {
+    if (substring(sequence1, i, i) == substring(sequence2, j, j)) {
+      dot_matrix[i, j] <- 1
+    }
+  }
+}
+
+# Plot the dot matrix
+image(1:seq2_length, 1:seq1_length, dot_matrix, col = c("white", "black"))
+
+# Add labels and axes
+axis(1, at = 1:seq2_length, labels = unlist(strsplit(sequence2, "")))
+axis(2, at = 1:seq1_length, labels = unlist(strsplit(sequence1, "")))
+
+# Add a title
+title(main = "Dot Matrix Pairwise Alignment")
+
+# Adjust margins
+par(mar = c(5, 4, 4, 6))
+
+# Add a legend
+legend("topright", legend = c("Mismatch", "Match"), fill = c("white", "black"))
+
+# Add a grid
+abline(h = 1:seq1_length - 0.5, col = "gray", lty = 2)
+abline(v = 1:seq2_length - 0.5, col = "gray", lty = 2)

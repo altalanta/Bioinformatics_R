@@ -1,0 +1,26 @@
+# Load the Biostrings package
+library(Biostrings)
+
+# Define two DNA sequences (replace with your sequences)
+sequence1 <- DNAString("ATCGATCGATCG")
+sequence2 <- DNAString("ATCGGTCGATCG")
+
+# Initialize variables for matches and total positions
+alignment_matches <- 0
+total_positions <- max(length(sequence1), length(sequence2))
+
+# Iterate through the sequences letter by letter
+for (i in 1:total_positions) {
+  base1 <- substring(sequence1, i, i)
+  base2 <- substring(sequence2, i, i)
+
+  if (base1 == base2) {
+    alignment_matches <- alignment_matches + 1
+  }
+}
+
+# Calculate alignment percentage
+alignment_percentage <- (alignment_matches / total_positions) * 100
+
+# Print the alignment percentage
+cat("Alignment Percentage:", alignment_percentage, "%\n")
